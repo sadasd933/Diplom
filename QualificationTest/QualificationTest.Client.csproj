@@ -201,16 +201,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\ApplicationContext.cs" />
     <Compile Include="Pages\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Employee.cs" />
     <Compile Include="Pages\MainProgram.xaml.cs">
       <DependentUpon>MainProgram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Question.cs" />
-    <Compile Include="Classes\QuestionDb.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
