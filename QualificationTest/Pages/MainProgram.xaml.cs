@@ -24,5 +24,9 @@ namespace QualificationTest
         {
             InitializeComponent();
         }
+
+        private void SubmitAnswer_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

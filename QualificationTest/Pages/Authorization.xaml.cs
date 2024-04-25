@@ -20,7 +20,6 @@ namespace QualificationTest
     /// </summary>
     public partial class Authorization : Page
     {
-        bool loginConfirmed = false;
         public Authorization()
         {
             InitializeComponent();
@@ -28,10 +27,39 @@ namespace QualificationTest
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (loginConfirmed)
+            string login = loginTB.Text.ToString().Trim();
+            string pass = passwordTB.Password.ToString().Trim();
+
+            if (login.Length < 5)
             {
-                NavigationService.Navigate(new MainProgram());
+                loginTB.ToolTip = "Поле введено некорректно!";
+                loginTB.Background = Brushes.DarkRed;
             }
+            else if (pass.Length<5)
+            {
+                passwordTB.ToolTip = "Поле введено некорректно!";
+                passwordTB.Background = Brushes.DarkRed;
+            }
+            else
+            {
+                loginTB.ToolTip = "!";
+                loginTB.Background = Brushes.Transparent;
+                passwordTB.ToolTip = "!";
+                passwordTB.Background = Brushes.Transparent;
+
+                Employee authEmployee = null;
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    authEmployee = db.Employees.Where(b=>b.EmployeeLogin==login && b.EmployeePassword==pass).FirstOrDefault();
+                }
+                if(authEmployee != null)
+                {
+                    MessageBox.Show("Добро пожаловать!");
+                    NavigationService.Navigate(new MainProgram());
+
+                }
+            }
+
         }
     }
 }
