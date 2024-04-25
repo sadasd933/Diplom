@@ -52,7 +52,10 @@ namespace QualificationTest
                 {
                     MessageBox.Show("Добро пожаловать!");
                     NavigationService.Navigate(new MainProgram());
-
+                    Application.Current.MainWindow.MaxHeight = 768;
+                    Application.Current.MainWindow.Height = 768;
+                    Application.Current.MainWindow.MaxWidth = 1024;
+                    Application.Current.MainWindow.Width = 1024;
                 }
                 else MessageBox.Show("Вы ввели что-то некорректно!");
             }

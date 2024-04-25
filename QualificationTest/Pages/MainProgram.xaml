@@ -5,17 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QualificationTest"
         mc:Ignorable="d"
-        Title="MainProgram" Height="450" Width="800" Background="White">
+        Title="MainProgram" Height="800" Width="1000" Background="White">
     <Grid>
-        <RadioButton x:Name="Ans1" Grid.Row="0" Height="15" Width="15" Margin="0,0,725,10"/>
-        <RadioButton x:Name="Ans2" Grid.Row="0" Height="15" Width="15" Margin="0,0,725,-60"/>
-        <RadioButton x:Name="Ans3" Grid.Row="0" Height="15" Width="15" Margin="0,0,725,-130"/>
-        <TextBlock x:Name="QuestionTextTextBlock" Text="ASDASD" Grid.Row="0" Height="100" Width="750" Margin="0,-180,0,0"/>
-        <TextBlock x:Name="QuestionAnswer1" Text="ASDASD" Grid.Row="1" Height="30" Width="700" Margin="0,0,0,0"/>
-        <TextBlock x:Name="QuestionAnswer2" Text="ASDASD" Grid.Row="2" Height="30" Width="700" Margin="0,70,0,0"/>
-        <TextBlock x:Name="QuestionAnswer3" Text="ASDASD" Grid.Row="3" Height="30" Width="700" Margin="0,140,0,0"/>
-        <TextBox x:Name="Answer_TextBox" HorizontalAlignment="Left" Grid.Row="4" Height="30" Width="100" Margin="50,250,0,0"/>
-        <Button x:Name="SubmitAnswer" HorizontalAlignment="Left" Grid.Row="4" Height="25" Width="80" Margin="160,250,0,0" Click="SubmitAnswer_Click"/>
-        <TextBlock x:Name="Progress" Text="1/5" Margin="414,10,25,362"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="2.5*"/>
+
+        </Grid.RowDefinitions>
+        <RadioButton x:Name="Ans1" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Height="20" Width="20" Margin="20,0,0,0"/>
+        <RadioButton x:Name="Ans2" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="3" Height="20" Width="20" Margin="20,0,0,0"/>
+        <RadioButton x:Name="Ans3" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="4" Height="20" Width="20" Margin="20,0,0,0"/>
+        <TextBlock x:Name="QuestionTextTextBlock" Text="Здесь будет текст вопроса" Grid.Row="0" FontSize="20"
+                   VerticalAlignment="Top" HorizontalAlignment="Left" Height="100" Width="750" Margin="20"/>
+        <TextBlock x:Name="QuestionAnswer1" Grid.Row="2" Text="Вариант ответа №1" Height="30" Margin="50,0,0,0"/>
+        <TextBlock x:Name="QuestionAnswer2" Grid.Row="3" Text="Вариант ответа №2" Height="30" Margin="50,0,0,0"/>
+        <TextBlock x:Name="QuestionAnswer3" Grid.Row="4" Text="Вариант ответа №3" Height="30" Margin="50,0,0,0"/>
+        <Button x:Name="SubmitAnswer" Content="Ответить" HorizontalAlignment="Left" Grid.Row="5" Height="30" Width="120" Margin="25,0,0,0" Click="SubmitAnswer_Click"/>
+        <Image x:Name="QuestionImage" Grid.Row="1" Stretch="Fill"
+               VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="260" Width="750" Margin="20" Source="../Databases/Images/PlaceHolder.png"/>
     </Grid>
 </Page>

@@ -20,13 +20,20 @@ namespace QualificationTest
     /// </summary>
     public partial class MainProgram : Page
     {
+        ApplicationContext db;
         public MainProgram()
         {
             InitializeComponent();
+            db = new ApplicationContext();
+            LoadQuestion();
         }
 
         private void SubmitAnswer_Click(object sender, RoutedEventArgs e)
         {
+        }
+        public void LoadQuestion()
+        {
+            
         }
     }
 }
