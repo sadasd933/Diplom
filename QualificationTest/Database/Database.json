@@ -1,0 +1,110 @@
+{
+    "type": "database",
+    "name": "MyApllicationDatabase",
+    "objects": [
+        {
+            "type": "table",
+            "database": null,
+            "name": "Employees",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Employees (EmployeeID INTEGER PRIMARY KEY, EmployeeName TEXT (120), EmployeeLogin TEXT (25), EmployeePassword TEXT (25))",
+            "columns": [
+                {
+                    "name": "EmployeeID",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY"
+                        }
+                    ]
+                },
+                {
+                    "name": "EmployeeName",
+                    "type": "TEXT"
+                },
+                {
+                    "name": "EmployeeLogin",
+                    "type": "TEXT"
+                },
+                {
+                    "name": "EmployeePassword",
+                    "type": "TEXT"
+                }
+            ],
+            "rows": [
+                [
+                    1,
+                    "Zhidkov Ivan",
+                    "zhidkov.iv",
+                    "d7ySDc"
+                ],
+                [
+                    2,
+                    "Martemyanov Denis",
+                    "martemyanov.da",
+                    "1160207"
+                ],
+                [
+                    3,
+                    "Administrator",
+                    "admin",
+                    "nimda"
+                ],
+                [
+                    4,
+                    "Zhidkova Lyudmila",
+                    "zhidkova.ls",
+                    "qwe123"
+                ]
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "Questions",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Questions (QuestionID INTEGER PRIMARY KEY, QuestionText TEXT (240), AnswerVariant1 TEXT (120), AnswerVariant2 TEXT (120), AnswerVariant3 TEXT (120), AnswerImagePath TEXT (240), CorrectAnswer TEXT (1))",
+            "columns": [
+                {
+                    "name": "QuestionID",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY"
+                        }
+                    ]
+                },
+                {
+                    "name": "QuestionText",
+                    "type": "TEXT"
+                },
+                {
+                    "name": "AnswerVariant1",
+                    "type": "TEXT"
+                },
+                {
+                    "name": "AnswerVariant2",
+                    "type": "TEXT"
+                },
+                {
+                    "name": "AnswerVariant3",
+                    "type": "TEXT"
+                },
+                {
+                    "name": "AnswerImagePath",
+                    "type": "TEXT"
+                },
+                {
+                    "name": "CorrectAnswer",
+                    "type": "TEXT"
+                }
+            ],
+            "rows": [
+            ]
+        }
+    ]
+}

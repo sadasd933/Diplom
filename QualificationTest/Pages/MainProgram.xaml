@@ -1,0 +1,21 @@
+﻿<Page x:Class="QualificationTest.MainProgram"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QualificationTest"
+        mc:Ignorable="d"
+        Title="MainProgram" Height="450" Width="800" Background="White">
+    <Grid>
+        <RadioButton x:Name="Ans1" Grid.Row="0" Height="15" Width="15" Margin="0,0,725,10"/>
+        <RadioButton x:Name="Ans2" Grid.Row="0" Height="15" Width="15" Margin="0,0,725,-60"/>
+        <RadioButton x:Name="Ans3" Grid.Row="0" Height="15" Width="15" Margin="0,0,725,-130"/>
+        <TextBlock x:Name="QuestionTextTextBlock" Text="ASDASD" Grid.Row="0" Height="100" Width="750" Margin="0,-180,0,0"/>
+        <TextBlock x:Name="QuestionAnswer1" Text="ASDASD" Grid.Row="1" Height="30" Width="700" Margin="0,0,0,0"/>
+        <TextBlock x:Name="QuestionAnswer2" Text="ASDASD" Grid.Row="2" Height="30" Width="700" Margin="0,70,0,0"/>
+        <TextBlock x:Name="QuestionAnswer3" Text="ASDASD" Grid.Row="3" Height="30" Width="700" Margin="0,140,0,0"/>
+        <TextBox x:Name="Answer_TextBox" HorizontalAlignment="Left" Grid.Row="4" Height="30" Width="100" Margin="50,250,0,0"/>
+        <Button x:Name="SubmitAnswer" HorizontalAlignment="Left" Grid.Row="4" Height="25" Width="80" Margin="160,250,0,0" Click="SubmitAnswer_Click"/>
+        <TextBlock x:Name="Progress" Text="1/5" Margin="414,10,25,362"/>
+    </Grid>
+</Page>

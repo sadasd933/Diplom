@@ -1,0 +1,20 @@
+[
+    {
+        "EmployeeID": 1,
+        "EmployeeLogin": "zhidkov.iv",
+        "EmployeeName": "Zhidkov Ivan",
+        "EmployeePassword": "d7ySDc"
+    },
+    {
+        "EmployeeID": 2,
+        "EmployeeLogin": "martemyanov.da",
+        "EmployeeName": "Martemyanov Denis",
+        "EmployeePassword": 1160207
+    },
+    {
+        "EmployeeID": 3,
+        "EmployeeLogin": "admin",
+        "EmployeeName": "Administrator",
+        "EmployeePassword": "nimda"
+    }
+]
