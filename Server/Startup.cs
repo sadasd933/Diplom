@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Server
 {
-    
+
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
@@ -23,7 +23,8 @@ namespace Server
             app.UseRouting();
             var wsOptions = new WebSocketOptions { KeepAliveInterval = TimeSpan.FromSeconds(120) };
             app.UseWebSockets(wsOptions);
-            app.Use(async (context, next) => {
+            app.Use(async (context, next) =>
+            {
                 if (context.Request.Path == "/send")
                 {
                     if (context.WebSockets.IsWebSocketRequest)
@@ -48,7 +49,7 @@ namespace Server
             {
                 while (!result.CloseStatus.HasValue)
                 {
-                    string msg = Encoding.UTF8.GetString(new ArraySegment<byte>(buffer,0, result.Count));
+                    string msg = Encoding.UTF8.GetString(new ArraySegment<byte>(buffer, 0, result.Count));
                     Console.WriteLine($"Test has been Passed! {msg}");
                     await webSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes($"Message from server: {DateTime.UtcNow:f} ")), result.MessageType, result.EndOfMessage, System.Threading.CancellationToken.None);
                     result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), System.Threading.CancellationToken.None);
