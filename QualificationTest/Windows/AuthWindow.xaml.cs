@@ -1,63 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QualificationTest
 {
     /// <summary>
     /// Логика взаимодействия для Authorization.xaml
     /// </summary>
-    public partial class Authorization : Page
+    public partial class AuthWindow : Window
     {
-        public Authorization()
+        ApplicationContext db;
+
+        public AuthWindow()
         {
+
             InitializeComponent();
+            db = new ApplicationContext();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            string login = loginTB.Text.ToString().Trim();
-            string pass = passwordTB.Password.ToString().Trim();
+            string login = loginTB.Text.Trim();
+            string pass = passwordTB.Password.Trim();
 
             if (login.Length < 5)
             {
                 loginTB.ToolTip = "Поле введено некорректно!";
                 loginTB.Background = Brushes.DarkRed;
             }
-            else if (pass.Length<5)
+            else if (pass.Length < 5)
             {
                 passwordTB.ToolTip = "Поле введено некорректно!";
                 passwordTB.Background = Brushes.DarkRed;
             }
             else
             {
-                loginTB.ToolTip = "!";
+                loginTB.ToolTip = "";
                 loginTB.Background = Brushes.Transparent;
-                passwordTB.ToolTip = "!";
+                passwordTB.ToolTip = "";
                 passwordTB.Background = Brushes.Transparent;
 
                 Employee authEmployee = null;
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    authEmployee = db.Employees.Where(b=>b.EmployeeLogin==login && b.EmployeePassword==pass).FirstOrDefault();
+                    authEmployee = db.Employees.Where(b => b.EmployeeLogin == login && b.EmployeePassword ==
+                    pass).FirstOrDefault();
                 }
-                if(authEmployee != null)
+                if (authEmployee != null)
                 {
                     MessageBox.Show("Добро пожаловать!");
-                    NavigationService.Navigate(new MainProgram());
+                    //NavigationService.Navigate(new MainProgram());
 
                 }
+                else MessageBox.Show("Вы ввели что-то некорректно!");
             }
 
         }

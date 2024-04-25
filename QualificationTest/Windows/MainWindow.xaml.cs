@@ -26,7 +26,7 @@ namespace QualificationTest
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Content = new Authorization();
+            
         }
 
 
