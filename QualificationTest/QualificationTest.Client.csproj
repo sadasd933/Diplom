@@ -210,7 +210,6 @@
       <DependentUpon>MainProgram.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Question.cs" />
-    <Compile Include="Classes\QuestionDb.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
