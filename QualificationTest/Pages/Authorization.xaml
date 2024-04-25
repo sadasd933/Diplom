@@ -19,7 +19,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Авторизация" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="40" FontWeight="Bold" Margin="20,0,0,0"/>
+            <TextBlock x:Name="clientTB" Text="Авторизация" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="40" FontWeight="Bold" Margin="20,0,0,0"/>
             <TextBox materialDesign:HintAssist.Hint="Введите логин" x:Name="loginTB" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="30" Margin="20,30,0,0"/>
             <PasswordBox materialDesign:HintAssist.Hint="Введите пароль"  x:Name="passwordTB" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="30" Margin="20,-30,0,0"/>
             <Button x:Name="LoginButton" Content="Вход" FontSize="18" Click="LoginButton_Click" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="30" Margin="0,0,0,0" />
