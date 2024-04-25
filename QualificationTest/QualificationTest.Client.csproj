@@ -207,7 +207,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\AuthWindow.xaml">
+    <Page Include="Pages\Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,8 +225,8 @@
       <DependentUpon>MainProgram.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Question.cs" />
-    <Compile Include="Windows\AuthWindow.xaml.cs">
-      <DependentUpon>AuthWindow.xaml</DependentUpon>
+    <Compile Include="Pages\Authorization.xaml.cs">
+      <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

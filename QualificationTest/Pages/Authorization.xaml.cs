@@ -9,11 +9,11 @@ namespace QualificationTest
     /// <summary>
     /// Логика взаимодействия для Authorization.xaml
     /// </summary>
-    public partial class AuthWindow : Window
+    public partial class Authorization : Page
     {
         ApplicationContext db;
 
-        public AuthWindow()
+        public Authorization()
         {
 
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace QualificationTest
                 if (authEmployee != null)
                 {
                     MessageBox.Show("Добро пожаловать!");
-                    //NavigationService.Navigate(new MainProgram());
+                    NavigationService.Navigate(new MainProgram());
 
                 }
                 else MessageBox.Show("Вы ввели что-то некорректно!");
