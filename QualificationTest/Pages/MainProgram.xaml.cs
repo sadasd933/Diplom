@@ -169,7 +169,7 @@ namespace QualificationTest
 
         public void SendToServer(string message)
         {
-
+             
         }
 
     }
