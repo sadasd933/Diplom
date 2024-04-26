@@ -48,13 +48,13 @@ namespace QualificationTest
                     break;
 
                 case "2":
-                    if (Ans3.IsChecked == true)
+                    if (Ans2.IsChecked == true)
                     {
                         numOfCorrectAnswers++;
                     }
                     break;
                 case "3":
-                    if (Ans2.IsChecked == true)
+                    if (Ans3.IsChecked == true)
                     {
                         numOfCorrectAnswers++;
                     }
