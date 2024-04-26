@@ -21,6 +21,7 @@ namespace QualificationTest.Pages
             string numOfCorrectAnswers = Application.Current.Properties["corAnsCount"].ToString();
 
             msg = $"{testerName} прошёл тест и набрал {numOfCorrectAnswers} правильных ответов из 10!";
+            SendToServer(msg);
         }
 
         private void Results_Click(object sender, RoutedEventArgs e)
@@ -50,12 +51,5 @@ namespace QualificationTest.Pages
                 }
             }
         }
-
-        private void SendDataToServer_Click(object sender, RoutedEventArgs e)
-        {
-
-            SendToServer(msg);
-        }
-
     }
 }
