@@ -45,17 +45,20 @@ namespace QualificationTest
                 Employee authEmployee = null;
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    authEmployee = db.Employees.Where(b => b.EmployeeLogin == login && b.EmployeePassword ==
+                    authEmployee = db.Employees.Where(b => b.EmployeeLogin.ToString() == login && b.EmployeePassword.ToString() ==
                     pass).FirstOrDefault();
                 }
                 if (authEmployee != null)
                 {
                     MessageBox.Show("Добро пожаловать!");
+                    Application.Current.Properties["test"] = authEmployee.EmployeeName.ToString();
+
                     NavigationService.Navigate(new MainProgram());
                     Application.Current.MainWindow.MaxHeight = 768;
                     Application.Current.MainWindow.Height = 768;
                     Application.Current.MainWindow.MaxWidth = 1024;
                     Application.Current.MainWindow.Width = 1024;
+
                 }
                 else MessageBox.Show("Вы ввели что-то некорректно!");
             }
