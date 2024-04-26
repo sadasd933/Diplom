@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QualificationTest.Pages;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -27,11 +28,36 @@ namespace QualificationTest
         public int questionIndex = -1;
         public string correctAnswer;
         public int numOfCorrectAnswers = 0;
+        public int currentQuestionIndex = -1;
+
+        public int[] answers = new int[10];
+        public int[] corAnswers = new int[10];
+
+
+        int[] questionOrder = new int[10];
+
 
         public MainProgram()
         {
+
             InitializeComponent();
             db = new ApplicationContext();
+
+            
+            for (int i = 0; i < questionOrder.Length; i++)
+            {
+                questionIndex = rnd.Next(1, 11);
+                if (questionOrder.Contains(questionIndex))
+                {
+                    i--;
+                }
+                else
+                {
+                    questionOrder[i] = questionIndex;
+                    arrays.Text += questionOrder[i].ToString();
+                }
+            }
+            arrays.Text += "\n";
             LoadQuestion();
             testerName.Text = (string)System.Windows.Application.Current.Properties["test"];
         }
@@ -43,20 +69,56 @@ namespace QualificationTest
                 case "1":
                     if (Ans1.IsChecked == true)
                     {
+                        answers[currentQuestionIndex] = 1;
                         numOfCorrectAnswers++;
+                        corAnswers[currentQuestionIndex] = 1;
+                    }
+                    if (Ans2.IsChecked == true)
+                    {
+                        answers[currentQuestionIndex] = 2;
+                        corAnswers[currentQuestionIndex] = 1;
+                    }
+                    if (Ans3.IsChecked == true)
+                    {
+                        answers[currentQuestionIndex] = 3;
+                        corAnswers[currentQuestionIndex] = 1;
                     }
                     break;
 
                 case "2":
                     if (Ans2.IsChecked == true)
                     {
+                        answers[currentQuestionIndex] = 2;
                         numOfCorrectAnswers++;
+                        corAnswers[currentQuestionIndex] = 2;
+                    }
+                    if (Ans1.IsChecked == true)
+                    {
+                        answers[currentQuestionIndex] = 1;
+                        corAnswers[currentQuestionIndex] = 2;
+                    }
+                    if (Ans3.IsChecked == true)
+                    {
+                        answers[currentQuestionIndex] = 3;
+                        corAnswers[currentQuestionIndex] = 2;
                     }
                     break;
                 case "3":
                     if (Ans3.IsChecked == true)
                     {
+                        answers[currentQuestionIndex] = 3;
                         numOfCorrectAnswers++;
+                        corAnswers[currentQuestionIndex] = 3;
+                    }
+                    if (Ans1.IsChecked == true)
+                    {
+                        answers[currentQuestionIndex] = 1;
+                        corAnswers[currentQuestionIndex] = 3;
+                    }
+                    if (Ans2.IsChecked == true)
+                    {
+                        answers[currentQuestionIndex] = 2;
+                        corAnswers[currentQuestionIndex] = 3;
                     }
                     break;
 
@@ -66,27 +128,35 @@ namespace QualificationTest
 
         public void LoadQuestion()
         {
-            
-            int[] arr = new int[10];
-            for(int i = 0; i<arr.Length; i++)
+            if (currentQuestionIndex < 8)
             {
-                questionIndex = rnd.Next(1, 11);
-                if (arr.Contains(questionIndex))
+                currentQuestionIndex++;
+            }
+            else if (currentQuestionIndex == 8)
+            {
+                currentQuestionIndex++;
+                SubmitAnswer.Content = "Завершить тестирование";
+            }
+            else
+            {
+                for (int i = 0; i < 10; i++)
                 {
-                    i--;
+                    System.Windows.Application.Current.Properties["userAnswers"] += answers[i].ToString();
+                    System.Windows.Application.Current.Properties["corAnswers"] += corAnswers[i].ToString();
+                    System.Windows.Application.Current.Properties["questionOrder"] += questionOrder[i].ToString();
                 }
-                else
-                {
-                    arr[i] = questionIndex;
-                }
+
+                System.Windows.Application.Current.Properties["corAnsCount"] = numOfCorrectAnswers;
+                NavigationService.Navigate(new TestPassedPage());
             }
 
+            var curAnsInd = questionOrder[currentQuestionIndex];
 
             Question currQ = null;
             using (ApplicationContext db = new ApplicationContext())
             {
                 
-                currQ = db.Questions.Where(b => b.QuestionID == questionIndex).FirstOrDefault();
+                currQ = db.Questions.Where(b => b.QuestionID == curAnsInd).FirstOrDefault();
                 QuestionTextTextBlock.Text = currQ.QuestionText.ToString();
                 QuestionAnswer1.Text = currQ.AnswerVariant1.ToString();
                 QuestionAnswer2.Text = currQ.AnswerVariant2.ToString();
