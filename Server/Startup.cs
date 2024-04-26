@@ -1,9 +1,14 @@
 ﻿using System.Net;
 using System.Net.WebSockets;
 using System.Text;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 
-namespace Server
+namespace QualificationTest.Server
 {
 
     public class Startup
@@ -23,7 +28,7 @@ namespace Server
             app.UseRouting();
             var wsOptions = new WebSocketOptions { KeepAliveInterval = TimeSpan.FromSeconds(120) };
             app.UseWebSockets(wsOptions);
-            app.Use(async (context, next) =>
+            app.Run(async (context) =>
             {
                 if (context.Request.Path == "/send")
                 {
@@ -31,7 +36,7 @@ namespace Server
                     {
                         using (WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync())
                         {
-                            await next(context);
+                            await Send(context, webSocket);
                         }
                     }
                     else
