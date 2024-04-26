@@ -47,10 +47,12 @@ namespace QualificationTest.Pages
             else if (currentQuestionIndex == 8)
             {
                 currentQuestionIndex++;
-                NextQuestion.Content = "Конец";
+                NextQuestion.Content = "Перейти к авторизации";
             }
             else
             {
+
+
                 NavigationService.Navigate(new Authorization());
             }
 

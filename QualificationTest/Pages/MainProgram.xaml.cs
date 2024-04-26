@@ -133,8 +133,11 @@ namespace QualificationTest
                     System.Windows.Application.Current.Properties["corAnswers"] += corAnswers[i].ToString();
                     System.Windows.Application.Current.Properties["questionOrder"] += questionOrder[i].ToString();
                 }
-
                 System.Windows.Application.Current.Properties["corAnsCount"] = numOfCorrectAnswers;
+
+
+                SendToServer($"{testerName} прошёл тестирование и ответил правильно на {numOfCorrectAnswers} вопросов из 10");
+
                 NavigationService.Navigate(new TestPassedPage());
             }
 
@@ -153,7 +156,6 @@ namespace QualificationTest
                 {
                     QuestionImage.Source = new BitmapImage(new Uri(currQ.AnswerImagePath.ToString()));
                 }
-
                 else
                 {
                     QuestionImage.Source = null;
@@ -163,5 +165,12 @@ namespace QualificationTest
 
             }
         }
+
+
+        public void SendToServer(string message)
+        {
+
+        }
+
     }
 }
