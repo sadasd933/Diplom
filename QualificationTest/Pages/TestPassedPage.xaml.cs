@@ -23,6 +23,7 @@ namespace QualificationTest.Pages
 
             msg = $"{testerName} прошёл тест и набрал {numOfCorrectAnswers} правильных ответов из 10!";
             SendToServer(msg);
+            answersCount.Text = msg;
         }
 
         private void Results_Click(object sender, RoutedEventArgs e)
