@@ -1,11 +1,16 @@
 ﻿using System.Net;
 using System.Net.WebSockets;
 using System.Text;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 
-namespace Server
+namespace QualificationTest.Server
 {
-    
+
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
@@ -23,14 +28,15 @@ namespace Server
             app.UseRouting();
             var wsOptions = new WebSocketOptions { KeepAliveInterval = TimeSpan.FromSeconds(120) };
             app.UseWebSockets(wsOptions);
-            app.Use(async (context, next) => {
+            app.Run(async (context) =>
+            {
                 if (context.Request.Path == "/send")
                 {
                     if (context.WebSockets.IsWebSocketRequest)
                     {
                         using (WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync())
                         {
-                            await next(context);
+                            await Send(context, webSocket);
                         }
                     }
                     else
@@ -48,7 +54,7 @@ namespace Server
             {
                 while (!result.CloseStatus.HasValue)
                 {
-                    string msg = Encoding.UTF8.GetString(new ArraySegment<byte>(buffer,0, result.Count));
+                    string msg = Encoding.UTF8.GetString(new ArraySegment<byte>(buffer, 0, result.Count));
                     Console.WriteLine($"Test has been Passed! {msg}");
                     await webSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes($"Message from server: {DateTime.UtcNow:f} ")), result.MessageType, result.EndOfMessage, System.Threading.CancellationToken.None);
                     result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), System.Threading.CancellationToken.None);

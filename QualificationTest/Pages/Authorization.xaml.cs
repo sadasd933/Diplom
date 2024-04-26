@@ -51,7 +51,7 @@ namespace QualificationTest
                 if (authEmployee != null)
                 {
                     MessageBox.Show("Добро пожаловать!");
-                    Application.Current.Properties["test"] = authEmployee.EmployeeName.ToString();
+                    Application.Current.Properties["tester"] = authEmployee.EmployeeName.ToString();
 
                     NavigationService.Navigate(new MainProgram());
                     Application.Current.MainWindow.MaxHeight = 768;

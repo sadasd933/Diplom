@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
-
-namespace QualificationTest
+﻿namespace QualificationTest
 {
     internal class Question
     {
@@ -15,7 +8,7 @@ namespace QualificationTest
         public string AnswerVariant2 { get; set; }
         public string AnswerVariant3 { get; set; }
         public string AnswerImagePath { get; set; }
-        public string CorrectAnswer {  get; set; }
+        public string CorrectAnswer { get; set; }
 
         public Question() { }
 
