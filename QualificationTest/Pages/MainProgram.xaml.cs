@@ -93,12 +93,12 @@ namespace QualificationTest
                 QuestionAnswer3.Text = currQ.AnswerVariant3.ToString();
                 if (currQ.AnswerImagePath != null)
                 {
-                    System.Windows.Controls.Image finalImage = new System.Windows.Controls.Image();
-                    BitmapImage logo = new BitmapImage();
-                    logo.BeginInit();
-                    logo.UriSource = new Uri(currQ.AnswerImagePath.ToString());
-                    logo.EndInit();
-                    finalImage.Source = logo;
+                    QuestionImage.Source = new BitmapImage(new Uri(currQ.CorrectAnswer.ToString()));
+                }
+
+                else
+                {
+                    QuestionImage.Source = null;
                 }
 
                 correctAnswer = currQ.CorrectAnswer.ToString();
