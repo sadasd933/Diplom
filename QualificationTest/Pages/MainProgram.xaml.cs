@@ -93,7 +93,7 @@ namespace QualificationTest
                 QuestionAnswer3.Text = currQ.AnswerVariant3.ToString();
                 if (currQ.AnswerImagePath != null)
                 {
-                    QuestionImage.Source = new BitmapImage(new Uri(currQ.CorrectAnswer.ToString()));
+                    QuestionImage.Source = new BitmapImage(new Uri(currQ.AnswerImagePath.ToString()));
                 }
 
                 else
