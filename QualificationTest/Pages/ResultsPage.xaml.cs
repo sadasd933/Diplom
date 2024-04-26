@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QualificationTest.Pages
 {
@@ -53,12 +44,12 @@ namespace QualificationTest.Pages
             {
                 currentQuestionIndex++;
             }
-            else if (currentQuestionIndex == 8) 
+            else if (currentQuestionIndex == 8)
             {
                 currentQuestionIndex++;
                 NextQuestion.Content = "Конец";
             }
-            else 
+            else
             {
                 NavigationService.Navigate(new Authorization());
             }
@@ -75,7 +66,7 @@ namespace QualificationTest.Pages
                 }
                 catch
                 {
-                    currentQuestionIndex ++;
+                    currentQuestionIndex++;
 
                 }
                 curQuestionInd = "10";

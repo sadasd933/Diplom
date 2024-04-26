@@ -1,20 +1,10 @@
 ﻿using QualificationTest.Pages;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace QualificationTest
 {
@@ -43,7 +33,7 @@ namespace QualificationTest
             InitializeComponent();
             db = new ApplicationContext();
 
-            
+
             for (int i = 0; i < questionOrder.Length; i++)
             {
                 questionIndex = rnd.Next(1, 11);
@@ -153,7 +143,7 @@ namespace QualificationTest
             Question currQ = null;
             using (ApplicationContext db = new ApplicationContext())
             {
-                
+
                 currQ = db.Questions.Where(b => b.QuestionID == curAnsInd).FirstOrDefault();
                 QuestionTextTextBlock.Text = currQ.QuestionText.ToString();
                 QuestionAnswer1.Text = currQ.AnswerVariant1.ToString();
