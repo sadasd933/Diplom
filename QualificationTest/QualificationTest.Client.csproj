@@ -252,9 +252,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Databases\Database.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Databases\Database.db" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -269,7 +267,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Databases\Images\q10.png" />
-    <Resource Include="Databases\Images\q8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Databases\Images\q9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
