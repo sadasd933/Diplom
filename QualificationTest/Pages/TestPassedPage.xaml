@@ -17,7 +17,7 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="clientTB" Text="Поздравляем" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="40" FontWeight="Bold" Margin="20,0,0,0"/>
-        <TextBlock x:Name="answersCount" Text="Вы набрали 0 из 10 правильных ответов!" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Margin="20,0,0,0"/>
+        <TextBlock x:Name="answersCount" Text="!!" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Margin="20,0,0,0"/>
         <Button x:Name="Results" Content="посмотреть результаты" FontSize="18" Click="Results_Click" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="30" Margin="0,0,0,0" />
     </Grid>
 </Page>

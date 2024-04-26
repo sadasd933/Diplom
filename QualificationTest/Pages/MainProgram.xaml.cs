@@ -1,6 +1,10 @@
 ﻿using QualificationTest.Pages;
 using System;
 using System.Linq;
+using System.Net.WebSockets;
+using System.Runtime.Remoting.Messaging;
+using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -135,8 +139,7 @@ namespace QualificationTest
                 }
                 System.Windows.Application.Current.Properties["corAnsCount"] = numOfCorrectAnswers;
 
-
-                SendToServer($"{testerName} прошёл тестирование и ответил правильно на {numOfCorrectAnswers} вопросов из 10");
+               
 
                 NavigationService.Navigate(new TestPassedPage());
             }
@@ -165,12 +168,5 @@ namespace QualificationTest
 
             }
         }
-
-
-        public void SendToServer(string message)
-        {
-             
-        }
-
     }
 }
