@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using WebSocketSharp;
 
 namespace QualificationTest.Pages
 {
@@ -21,6 +22,7 @@ namespace QualificationTest.Pages
             string numOfCorrectAnswers = Application.Current.Properties["corAnsCount"].ToString();
 
             msg = $"{testerName} прошёл тест и набрал {numOfCorrectAnswers} правильных ответов из 10!";
+            SendToServer(msg);
         }
 
         private void Results_Click(object sender, RoutedEventArgs e)
@@ -28,34 +30,22 @@ namespace QualificationTest.Pages
             NavigationService.Navigate(new ResultsPage());
         }
 
-        private async void SendToServer(string message)
+        private void SendToServer(string message)
         {
-            var ws = new ClientWebSocket();
-
-            await ws.ConnectAsync(new Uri("ws://localhost:5050/ws"), CancellationToken.None);
-            byte[] buf = new byte[1056];
-
-            while (ws.State == WebSocketState.Open)
+            using (WebSocketSharp.WebSocket webSocket = new WebSocketSharp.WebSocket(
+                 "ws://172.17.0.51:3000/"))  // write the URL of server to
+                                                                  // connect to
             {
-                var result = await ws.ReceiveAsync(new ArraySegment<byte>(buf), CancellationToken.None);
+                webSocket.OnMessage += webSocket_OnMessage;  // message for the function below
 
-                if (result.MessageType == WebSocketMessageType.Close)
-                {
-                    await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None);
-                    Console.WriteLine(result.CloseStatusDescription);
-                }
-                else
-                {
-                    Console.WriteLine(Encoding.ASCII.GetString(buf, 0, result.Count));
-                }
+                webSocket.Connect();                          // connection to the server
+                webSocket.Send(message);  // sending a message to the server
             }
         }
 
-        private void SendDataToServer_Click(object sender, RoutedEventArgs e)
+        public static void webSocket_OnMessage(object viewer, MessageEventArgs a)  // function for server to respond
         {
-
-            SendToServer(msg);
+            Console.WriteLine("Recived from the server " + a.Data);
         }
-
     }
 }
