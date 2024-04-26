@@ -54,10 +54,8 @@ namespace QualificationTest
                 else
                 {
                     questionOrder[i] = questionIndex;
-                    arrays.Text += questionOrder[i].ToString();
                 }
             }
-            arrays.Text += "\n";
             LoadQuestion();
             testerName.Text = (string)System.Windows.Application.Current.Properties["test"];
         }

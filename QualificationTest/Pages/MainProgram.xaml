@@ -30,7 +30,5 @@
         <Button x:Name="SubmitAnswer" Content="Ответить" HorizontalAlignment="Left" Grid.Row="4" Height="30" Width="120" Margin="25,0,0,0" Click="SubmitAnswer_Click"/>
         <Image x:Name="QuestionImage" Grid.Row="5" Stretch="Fill"
                VerticalAlignment="Top" HorizontalAlignment="Left" Height="300" Width="938" Margin="20,20,0,0"/>
-        <TextBlock x:Name="arrays" Grid.Row="5"
-       VerticalAlignment="Top" HorizontalAlignment="Left" Height="300" Width="938" Margin="20,20,0,0"/>
-    </Grid>
+       </Grid>
 </Page>
