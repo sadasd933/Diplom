@@ -30,39 +30,23 @@ namespace QualificationTest.Pages
 
         private async void SendToServer(string message)
         {
-            using (ClientWebSocket client = new ClientWebSocket())
-            {
-                Uri serviceUri = new Uri("ws://localhost:5000/send");
-                var cTs = new CancellationTokenSource();
-                cTs.CancelAfter(TimeSpan.FromSeconds(120));
-                try
-                {
-                    await client.ConnectAsync(serviceUri, cTs.Token);
-                    while (client.State == WebSocketState.Open)
-                    {
-                        if (!string.IsNullOrEmpty(message))
-                        {
-                            ArraySegment<byte> byteToSend = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message));
-                            await client.SendAsync(byteToSend, WebSocketMessageType.Text, true, cTs.Token);
-                            var responseBuffer = new byte[1024];
-                            var offset = 0;
-                            var packet = 1024;
-                            while (true)
-                            {
-                                ArraySegment<byte> byteReceived = new ArraySegment<byte>(responseBuffer, offset, packet);
-                                WebSocketReceiveResult response = await client.ReceiveAsync(byteReceived, cTs.Token);
-                                var responseMessage = Encoding.UTF8.GetString(responseBuffer, offset, response.Count);
-                                answersCount.Text = responseMessage.ToString();
-                                if (response.EndOfMessage)
-                                    break;
-                            }
-                        }
-                    }
-                }
-                catch (WebSocketException ex)
-                {
-                    answersCount.Text = ex.Message.ToString();
+            var ws = new ClientWebSocket();
 
+            await ws.ConnectAsync(new Uri("ws://localhost:5050/ws"), CancellationToken.None);
+            byte[] buf = new byte[1056];
+
+            while (ws.State == WebSocketState.Open)
+            {
+                var result = await ws.ReceiveAsync(new ArraySegment<byte>(buf), CancellationToken.None);
+
+                if (result.MessageType == WebSocketMessageType.Close)
+                {
+                    await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None);
+                    Console.WriteLine(result.CloseStatusDescription);
+                }
+                else
+                {
+                    Console.WriteLine(Encoding.ASCII.GetString(buf, 0, result.Count));
                 }
             }
         }
