@@ -1,0 +1,30 @@
+﻿<Page x:Class="QualificationTest.MainProgram"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QualificationTest"
+        mc:Ignorable="d"
+        Title="MainProgram" MinHeight="800" MinWidth="1000" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="1.2*"/>
+
+        </Grid.RowDefinitions>
+        <RadioButton x:Name="Ans1" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Height="30" Width="30" Margin="20,0,0,0"/>
+        <RadioButton x:Name="Ans2" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="3" Height="30" Width="30" Margin="20,0,0,0"/>
+        <RadioButton x:Name="Ans3" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="4" Height="30" Width="30" Margin="20,0,0,0"/>
+        <TextBlock x:Name="QuestionTextTextBlock" Text="Здесь будет текст вопроса" Grid.Row="0" FontSize="24"
+                   VerticalAlignment="Bottom" TextWrapping="Wrap" HorizontalAlignment="Left" Height="119" Width="732" Margin="20,20,0,0"/>
+        <TextBlock x:Name="QuestionAnswer1" Grid.Row="2" Text="Вариант ответа №1" MinHeight="20" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock x:Name="QuestionAnswer2" Grid.Row="3" Text="Вариант ответа №2" MinHeight="20" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock x:Name="QuestionAnswer3" Grid.Row="4" Text="Вариант ответа №3" MinHeight="20" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Button x:Name="SubmitAnswer" Content="Ответить" HorizontalAlignment="Left" Grid.Row="5" Height="40" Width="160" Margin="25,0,0,0" Click="SubmitAnswer_Click"/>
+        <Button x:Name="EndTestButton" Content="Завершить тестирования" HorizontalAlignment="Right" Grid.Row="5" Height="40" MinWidth="160" Margin="0,0,25,0" Click="EndTestButton_Click" Visibility="Hidden"/>
+    </Grid>
+</Page>

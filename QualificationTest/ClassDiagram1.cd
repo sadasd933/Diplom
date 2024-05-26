@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="QualificationTest.ApplicationContext">
+    <Position X="6.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ApplicationContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QualificationTest.Employee">
+    <Position X="12.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoA=</HashCode>
+      <FileName>Classes\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QualificationTest.Question">
+    <Position X="12.5" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAAAAAAgAAAAAACAAAAIABAAAAAEAAAAAA=</HashCode>
+      <FileName>Classes\Question.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QualificationTest.Authorization" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Pages\Authorization.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QualificationTest.MainProgram" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QEAEAAAAAAIQAAAAAAgAAQAAAEBQAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Pages\MainProgram.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QualificationTest.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Windows\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QualificationTest.Pages.ResultsPage" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QEAAAAAAAAAQAAAAAAAAAUAAAEAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\ResultsPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QualificationTest.Pages.TestPassedPage" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Pages\TestPassedPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
