@@ -204,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Pages\CreateQuestionsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MainProgram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,6 +215,14 @@
     <Page Include="Pages\Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ResultsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\TestPassedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -220,14 +232,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\Answer.cs" />
     <Compile Include="Classes\ApplicationContext.cs" />
-    <Compile Include="Classes\Employee.cs" />
+    <Compile Include="Classes\Question.cs" />
+    <Compile Include="Classes\Result.cs" />
+    <Compile Include="Classes\Test.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\UserAnswer.cs" />
+    <Compile Include="Pages\CreateQuestionsPage.xaml.cs">
+      <DependentUpon>CreateQuestionsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainProgram.xaml.cs">
       <DependentUpon>MainProgram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Question.cs" />
     <Compile Include="Pages\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ResultsPage.xaml.cs">
+      <DependentUpon>ResultsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TestPassedPage.xaml.cs">
+      <DependentUpon>TestPassedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -261,9 +286,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Databases\Images\PlaceHolder.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Databases\Images\q10.png" />
