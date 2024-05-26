@@ -1,5 +1,4 @@
-﻿using QualificationTest.Pages;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -46,15 +45,8 @@ namespace QualificationTest
                 User authUser = null;
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    try
-                    {   
-                            authUser = db.Users.Where(b => b.UsersLogin.ToString() == login && b.UsersPassword.ToString() == pass).FirstOrDefault();
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Пользователя с такими данными не существует!", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
-
-                    }
+                    authUser = db.Users.Where(b => b.UsersLogin.ToString() == login && b.UsersPassword.ToString() == pass).FirstOrDefault();
+                    Application.Current.Properties["testerName"] = authUser.UsersName.ToString();
                 }
                 if (authUser != null)
                 {
@@ -64,16 +56,12 @@ namespace QualificationTest
                             NavigationService.Navigate(new MainProgram());
                             break;
                         case "QA Engineer":
-                            NavigationService.Navigate(new CreateQuestionsPage());
                             break;
                     }
-
-                    Application.Current.Properties["testerName"] = authUser.UsersName.ToString();
-
-                    Application.Current.MainWindow.MaxHeight = 768;
-                    Application.Current.MainWindow.Height = 768;
-                    Application.Current.MainWindow.MaxWidth = 1024;
-                    Application.Current.MainWindow.Width = 1024;
+                }
+                else
+                {
+                    MessageBox.Show("Пользователя с такими данными не существует!", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 }
             }

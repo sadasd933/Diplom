@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QualificationTest
 {
@@ -11,9 +6,9 @@ namespace QualificationTest
     {
         [Key]
         public int UserAnswerID { get; set; }
-        public string CorrectAnswer{ get; set; }
+        public string CorrectAnswer { get; set; }
         public string UsersAnswer { get; set; }
-        public int UserID{ get; set; }
+        public int UserID { get; set; }
         public int QuestionID { get; set; }
         public int ResultID { get; set; }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QualificationTest"
         mc:Ignorable="d"
-        Title="MainProgram" Height="800" Width="1000" Background="White">
+        Title="MainProgram" MinHeight="800" MinWidth="1000" Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -25,5 +25,6 @@
         <TextBlock x:Name="QuestionAnswer2" Grid.Row="3" Text="Вариант ответа №2" MinHeight="20" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         <TextBlock x:Name="QuestionAnswer3" Grid.Row="4" Text="Вариант ответа №3" MinHeight="20" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         <Button x:Name="SubmitAnswer" Content="Ответить" HorizontalAlignment="Left" Grid.Row="5" Height="40" Width="160" Margin="25,0,0,0" Click="SubmitAnswer_Click"/>
+        <Button x:Name="EndTestButton" Content="Завершить тестирования" HorizontalAlignment="Right" Grid.Row="5" Height="40" MinWidth="160" Margin="0,0,25,0" Click="EndTestButton_Click" Visibility="Hidden"/>
     </Grid>
 </Page>

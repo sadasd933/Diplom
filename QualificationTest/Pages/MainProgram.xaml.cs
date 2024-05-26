@@ -1,11 +1,11 @@
 ﻿using QualificationTest.Classes;
 using QualificationTest.Pages;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.Generic;
 
 namespace QualificationTest
 {
@@ -22,6 +22,7 @@ namespace QualificationTest
         public Answer currentUserAnswer;
         public Answer correctAnswer;
         int indexOfQuestion = -1;
+        public string testerName = Application.Current.Properties["testerName"].ToString();
 
         public List<string> userAnswers = new List<string>(10);
         public List<string> correctAnswers = new List<string>(10);
@@ -30,7 +31,9 @@ namespace QualificationTest
 
         public MainProgram()
         {
+
             InitializeComponent();
+            SetPageSize();
             db = new ApplicationContext();
 
             for (int i = 0; i < questionOrder.Length; i++)
@@ -73,7 +76,7 @@ namespace QualificationTest
                     {
                         AddAnswers(2, 1);
                     }
-                    else if(Ans1.IsChecked == true)
+                    else if (Ans1.IsChecked == true)
                     {
                         AddAnswers(2, 2);
                     }
@@ -87,7 +90,7 @@ namespace QualificationTest
                     {
                         AddAnswers(3, 1);
                     }
-                    else if(Ans2.IsChecked == true)
+                    else if (Ans2.IsChecked == true)
                     {
                         AddAnswers(3, 2);
 
@@ -107,8 +110,6 @@ namespace QualificationTest
 
         public void LoadQuestion()
         {
-
-            User currentTester;
             Question currQ = null;
             Answer currAnswers1, currAnswers2, currAnswers3 = null;
 
@@ -119,25 +120,15 @@ namespace QualificationTest
             else if (currentQuestionIndex == 8)
             {
                 currentQuestionIndex++;
-                SubmitAnswer.Content = "Завершить тестирование";
-            }
-            else
-            {
+
                 for (int i = 0; i < 10; i++)
                 {
-                    System.Windows.Application.Current.Properties["questionOrder"] += questionOrder[i].ToString();
+                    Application.Current.Properties["questionOrder"] += questionOrder[i].ToString();
                 }
-                System.Windows.Application.Current.Properties["corAnsCount"] = numOfCorrectAnswers;
 
-                using (ApplicationContext db = new ApplicationContext())
-                {
+                EndTestButton.Visibility = Visibility.Visible;
+                SubmitAnswer.Visibility = Visibility.Hidden;
 
-                    string currentTesterName = Application.Current.Properties["testerName"].ToString();
-
-                    currentTester = db.Users.Where(u => u.UsersName == currentTesterName).FirstOrDefault();
-
-                }
-                NavigationService.Navigate(new TestPassedPage());
             }
 
             var curAnsInd = questionOrder[currentQuestionIndex];
@@ -190,7 +181,7 @@ namespace QualificationTest
                         case 1:
                             userAnswers.Add(QuestionAnswer1.Text.ToString());
                             correctAnswers.Add(QuestionAnswer2.Text.ToString());
-                            
+
                             break;
                         case 2:
                             userAnswers.Add(QuestionAnswer2.Text.ToString());
@@ -225,7 +216,7 @@ namespace QualificationTest
                     break;
             }
         }
-
+        //эту хуету никак не упростить блять
 
 
 
@@ -237,8 +228,7 @@ namespace QualificationTest
             UserAnswer answersToInsert = new UserAnswer();
             PropertyInfo[] properties = typeof(UserAnswer).GetProperties();
             User userToID = new User();
-            string userFio = Application.Current.Properties["testerName"].ToString();
-            userToID = db.Users.Where(u=>u.UsersName == userFio).FirstOrDefault();
+            userToID = db.Users.Where(u => u.UsersName == testerName).FirstOrDefault();
 
             foreach (PropertyInfo property in properties)
             {
@@ -269,6 +259,49 @@ namespace QualificationTest
                 db.SaveChanges();
             }
         }
+        private void SetPageSize()
+        {
+            Application.Current.MainWindow.MinHeight = 800;
+            Application.Current.MainWindow.MinWidth = 1000;
+        }
+
+        private void EndTestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            SaveResultsCommandExecute();
+
+            NavigationService.Navigate(new TestPassedPage());
+        }
+
+        private void SaveResultsCommandExecute()
+        {
+            Result resultsToInsert = new Result();
+            PropertyInfo[] properties = typeof(Result).GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                switch (property.Name)
+                {
+                    case "ResultsID":
+                        property.SetValue(resultsToInsert, 1);
+                        break;
+                    case "TesterName":
+                        property.SetValue(resultsToInsert, Application.Current.Properties["testerName"].ToString());
+                        break;
+                    case "PercentageOfCorrectAnswers":
+                        property.SetValue(resultsToInsert, numOfCorrectAnswers/10*100);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            using (var db = new ApplicationContext())
+            {
+                db.Results.Add(resultsToInsert);
+                db.SaveChanges();
+            }
+
+        }
+
 
     }
 }

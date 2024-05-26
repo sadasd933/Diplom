@@ -6,10 +6,10 @@ namespace QualificationTest
     {
         [Key]
         public int UsersID { get; set; }
-        public string UsersName  { get; set; }
-        public string UsersLogin{ get; set; }
-        public string UsersPassword{ get; set; }
-        public string UsersRole{ get; set; }
+        public string UsersName { get; set; }
+        public string UsersLogin { get; set; }
+        public string UsersPassword { get; set; }
+        public string UsersRole { get; set; }
 
 
         public User() { }

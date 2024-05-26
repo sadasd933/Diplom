@@ -1,5 +1,4 @@
-﻿using QualificationTest.Classes;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,9 +13,9 @@ namespace QualificationTest.Pages
     {
         ApplicationContext db;
         public int currentQuestionIndex = -1;
+        public int indexOfCurrentQuestion = 0;
+        public string curQuestionInd = null;
 
-        public string corAnswers = Application.Current.Properties["corAnswers"].ToString();
-        public string userAnswers = Application.Current.Properties["userAnswers"].ToString();
         public string questionOrder = Application.Current.Properties["questionOrder"].ToString();
 
 
@@ -29,7 +28,6 @@ namespace QualificationTest.Pages
             LoadNewQuestion();
 
 
-
         }
 
 
@@ -40,6 +38,7 @@ namespace QualificationTest.Pages
 
         private void LoadNewQuestion()
         {
+            indexOfCurrentQuestion++;
 
             if (currentQuestionIndex < 8)
             {
@@ -48,18 +47,30 @@ namespace QualificationTest.Pages
             else if (currentQuestionIndex == 8)
             {
                 currentQuestionIndex++;
-                NextQuestion.Content = "Перейти к авторизации";
+                NextQuestion.Visibility = Visibility.Hidden;
+                AuthorizationNavigationButton.Visibility = Visibility.Visible;
             }
             else
             {
 
-
                 NavigationService.Navigate(new Authorization());
             }
 
+            try
+            {
+                curQuestionInd = questionOrder[currentQuestionIndex].ToString();
 
-            string curQuestionInd = questionOrder[currentQuestionIndex].ToString();
-            string curUserAnsInd = userAnswers[currentQuestionIndex].ToString();
+            }
+            catch (System.Exception)
+            {
+            }
+            UserAnswer curUserAnsInd = db.UserAnswers.Where(b => b.UserAnswerID == indexOfCurrentQuestion).FirstOrDefault();
+
+            var currentQuestionInd = curUserAnsInd.QuestionID;
+            var correctAnswer = curUserAnsInd.CorrectAnswer;
+            var userAnswer = curUserAnsInd.UsersAnswer;
+            var currentQuestionText = db.Questions.Where(b => b.QuestionID == currentQuestionInd).FirstOrDefault();
+
             if (questionOrder[currentQuestionIndex].ToString() == "1" && questionOrder[currentQuestionIndex + 1].ToString() == "0")
             {
                 try
@@ -72,144 +83,36 @@ namespace QualificationTest.Pages
                     currentQuestionIndex++;
 
                 }
+
                 curQuestionInd = "10";
             }
 
-            int currentQuestionInd = int.Parse(curQuestionInd);
-            int currentUserAnswerInd = int.Parse(curUserAnsInd);
-
             Question currQ = null;
-            Answer currAns1, currAns2, currAnsCorrect = null;
 
             using (ApplicationContext db = new ApplicationContext())
             {
                 currQ = db.Questions.Where(c => c.QuestionID.ToString() == curQuestionInd).FirstOrDefault();
-                currAns1 = db.Answers.Where(c => c.QuestionID == currQ.QuestionID).FirstOrDefault();
-                currAns2 = db.Answers.Where(c => c.QuestionID == currQ.QuestionID&&c.AnswerID != currAns1.AnswerID).FirstOrDefault();
-                currAnsCorrect = db.Answers.Where(c => c.QuestionID == currQ.QuestionID && c.IsCorrect == "True").FirstOrDefault();
+                QuestionTextTextBlock.Text = currentQuestionText.QuestionText;
 
-                QuestionTextTextBlock.Text = currQ.QuestionText.ToString();
+                QuestionAnswerCorrect.Text = correctAnswer.ToString();
+                UserAnswer.Text = userAnswer.ToString();
 
-                string userAnswerDB = db.Answers.Where(c => c.QuestionID.ToString() == curQuestionInd && c.AnswerID % 3 == currentUserAnswerInd).FirstOrDefault().ToString(); ;
+                QuestionAnswerCorrect.Foreground = Brushes.Green;
 
-                switch (curUserAnsInd)
+                if (QuestionAnswerCorrect.Text == UserAnswer.Text)
                 {
-                    case "1":
-                        if (corAnswers[currentQuestionInd] == curUserAnsInd[currentQuestionInd])
-                        {
-                            UserAnswer.Foreground = Brushes.Green;
-                            UserAnswer.Text = currAnsCorrect.AnswerText;
-                        }
-                        else
-                        {
-                            UserAnswer.Foreground = Brushes.Red;
-                            UserAnswer.Text = userAnswerDB;
-                        }
-                        QuestionAnswerCorrect.Foreground = Brushes.Green;
-                        QuestionAnswerCorrect.Text = currAns1.AnswerText;
-                        break;
-                    case "2":
-                        if (corAnswers[currentQuestionInd] == curUserAnsInd[currentQuestionInd])
-                        {
-                            UserAnswer.Foreground = Brushes.Green;
-                            UserAnswer.Text = currAnsCorrect.AnswerText;
-                        }
-                        else
-                        {
-                            UserAnswer.Foreground = Brushes.Red;
-                            UserAnswer.Text = userAnswerDB;
-                        }
-                        QuestionAnswerCorrect.Foreground = Brushes.Green;
-                        QuestionAnswerCorrect.Text = currAns1.AnswerText;
-                        break;
-                    case "3":
-                        if (corAnswers[currentQuestionInd] == curUserAnsInd[currentQuestionInd])
-                        {
-                            UserAnswer.Foreground = Brushes.Green;
-                            UserAnswer.Text = currAnsCorrect.AnswerText;
-                        }
-                        else
-                        {
-                            UserAnswer.Foreground = Brushes.Red;
-                            UserAnswer.Text = userAnswerDB;
-                        }
-                        QuestionAnswerCorrect.Foreground = Brushes.Green;
-                        QuestionAnswerCorrect.Text = currAns1.AnswerText;
-                        break;
-
-
-                    default:
-                        break;
+                    UserAnswer.Foreground = Brushes.Green;
                 }
-
-
-                //    switch (currQ.CorrectAnswer)
-                //    {
-                //        case "1":
-                //            if (curUserAnsInd == "1")
-                //            {
-                //                UserAnswer.Foreground = Brushes.Green;
-                //                UserAnswer.Text = currQ.AnswerVariant1;
-                //            }
-                //            if (curUserAnsInd == "2")
-                //            {
-                //                UserAnswer.Foreground = Brushes.Red;
-                //                UserAnswer.Text = currQ.AnswerVariant2;
-                //            }
-                //            if (curUserAnsInd == "3")
-                //            {
-                //                UserAnswer.Foreground = Brushes.Red;
-                //                UserAnswer.Text = currQ.AnswerVariant3;
-                //            }
-                //            QuestionAnswerCorrect.Foreground = Brushes.Green;
-                //            QuestionAnswerCorrect.Text = currQ.AnswerVariant1;
-                //            break;
-                //        case "2":
-                //            if (curUserAnsInd == "1")
-                //            {
-                //                UserAnswer.Foreground = Brushes.Red;
-                //                UserAnswer.Text = currQ.AnswerVariant1;
-                //            }
-                //            if (curUserAnsInd == "2")
-                //            {
-                //                UserAnswer.Foreground = Brushes.Green;
-                //                UserAnswer.Text = currQ.AnswerVariant2;
-                //            }
-                //            if (curUserAnsInd == "3")
-                //            {
-                //                UserAnswer.Foreground = Brushes.Red;
-                //                UserAnswer.Text = currQ.AnswerVariant3;
-                //            }
-                //            QuestionAnswerCorrect.Foreground = Brushes.Green;
-                //            QuestionAnswerCorrect.Text = currQ.AnswerVariant2;
-                //            break;
-                //        case "3":
-                //            if (curUserAnsInd == "1")
-                //            {
-                //                UserAnswer.Foreground = Brushes.Red;
-                //                UserAnswer.Text = currQ.AnswerVariant1;
-                //            }
-                //            if (curUserAnsInd == "2")
-                //            {
-                //                UserAnswer.Foreground = Brushes.Red;
-                //                UserAnswer.Text = currQ.AnswerVariant2;
-                //            }
-                //            if (curUserAnsInd == "3")
-                //            {
-                //                UserAnswer.Foreground = Brushes.Green;
-                //                UserAnswer.Text = currQ.AnswerVariant3;
-                //            }
-                //            QuestionAnswerCorrect.Foreground = Brushes.Green;
-                //            QuestionAnswerCorrect.Text = currQ.AnswerVariant3;
-                //            break;
-                //    }
-                //}
+                else
+                {
+                    UserAnswer.Foreground = Brushes.Red;
+                }
             }
         }
 
-        private void ChechAnswers()
+        private void AuthorizationNavigationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Authorization());
         }
     }
 }

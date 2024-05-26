@@ -1,7 +1,4 @@
-﻿using System.Net.WebSockets;
-using System.Text;
-using System.Threading;
-using System;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -13,15 +10,15 @@ namespace QualificationTest.Pages
     /// </summary>
     public partial class TestPassedPage : Page
     {
-        public string msg;
+        ApplicationContext db = new ApplicationContext();
         public TestPassedPage()
         {
             InitializeComponent();
-            string testerName = Application.Current.Properties["testerName"].ToString();
-            string numOfCorrectAnswers = Application.Current.Properties["corAnsCount"].ToString();
+            Result currentResult = db.Results.Where(b => b.ResultsID >= 0).FirstOrDefault();
 
-            msg = $"{testerName} прошёл тест и набрал {numOfCorrectAnswers} правильных ответов из 10!";
-            answersCount.Text = msg;
+            var name = currentResult.TesterName;
+            var percentage = currentResult.PercentageOfCorrectAnswers;
+            answersCount.Text = $"{name} прошёл тест и набрал {percentage}% правильных ответов";
         }
 
         private void Results_Click(object sender, RoutedEventArgs e)

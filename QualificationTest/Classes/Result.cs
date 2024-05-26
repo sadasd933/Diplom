@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QualificationTest
 {
     public class Result
     {
         [Key]
-        public int ResultID { get; set; }
-        public int PercentageOfCorrectAnswers{ get; set; }
+        public int ResultsID { get; set; }
+        public string TesterName { get; set; }
+        public int PercentageOfCorrectAnswers { get; set; }
 
         public Result() { }
 
-        public Result(int resultID, int percentageOfCorrectAnswers)
+        public Result(int resultsID, string testerName, int percentageOfCorrectAnswers)
         {
-            ResultID = resultID;
+            ResultsID = resultsID;
+            TesterName = testerName;
             PercentageOfCorrectAnswers = percentageOfCorrectAnswers;
         }
     }

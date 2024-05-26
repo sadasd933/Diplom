@@ -204,10 +204,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Pages\CreateQuestionsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\MainProgram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,9 +235,6 @@
     <Compile Include="Classes\Test.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\UserAnswer.cs" />
-    <Compile Include="Pages\CreateQuestionsPage.xaml.cs">
-      <DependentUpon>CreateQuestionsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\MainProgram.xaml.cs">
       <DependentUpon>MainProgram.xaml</DependentUpon>
     </Compile>
@@ -286,12 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Databases\Images\q10.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Databases\Images\q9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
