@@ -1,0 +1,25 @@
+﻿<Page x:Class="QualificationTest.Pages.TestSelectionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QualificationTest.Pages"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="Test Selection">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Выбор тестирования" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                   FontSize="40" FontWeight="Bold" Margin="20,0,0,0" FontFamily="Bahnschrift SemiLight"/>
+        <ComboBox x:Name="testSelectionCB" materialDesign:HintAssist.Hint="Выберите тест" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"
+                   FontSize="20" Margin="20,0,0,0"/>
+        <Button x:Name="startTestButton" Content="Начать тестирование" FontSize="18" Click="startTestButton_Click" Grid.Row="3" 
+                VerticalAlignment="Center" HorizontalAlignment="Left" Width="250" Height="35" Margin="20,0,0,0" Cursor="Hand" />
+    </Grid>
+</Page>

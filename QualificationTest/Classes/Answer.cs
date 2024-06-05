@@ -9,7 +9,6 @@ namespace QualificationTest.Classes
         public string AnswerText { get; set; }
         public string IsCorrect { get; set; }
         public int QuestionID { get; set; }
-
         public Answer()
         {
         }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,91 +12,34 @@ namespace QualificationTest.Pages
     /// </summary>
     public partial class ResultsPage : Page
     {
-        ApplicationContext db;
-        public int currentQuestionIndex = -1;
-        public int indexOfCurrentQuestion = 0;
-        public string curQuestionInd = null;
-
-        public string questionOrder = Application.Current.Properties["questionOrder"].ToString();
-
-
+        private readonly ApplicationContext db;
+        private int currentQuestionIndex = -1;
+        List<UserAnswer> currentUserAnswer;
         public ResultsPage()
         {
             db = new ApplicationContext();
-
+            var lastResult = db.UserAnswers.Max(m => m.ResultID);
             InitializeComponent();
-
-            LoadNewQuestion();
-
-
-        }
-
-
-        private void NextQuestion_Click(object sender, RoutedEventArgs e)
-        {
+            currentUserAnswer = db.UserAnswers.Where(r => r.ResultID == lastResult).ToList();
+            currentQuestionIndex++;
             LoadNewQuestion();
         }
 
         private void LoadNewQuestion()
         {
-            indexOfCurrentQuestion++;
-
-            if (currentQuestionIndex < 8)
-            {
-                currentQuestionIndex++;
-            }
-            else if (currentQuestionIndex == 8)
-            {
-                currentQuestionIndex++;
-                NextQuestion.Visibility = Visibility.Hidden;
-                AuthorizationNavigationButton.Visibility = Visibility.Visible;
-            }
-            else
-            {
-
-                NavigationService.Navigate(new Authorization());
-            }
-
-            try
-            {
-                curQuestionInd = questionOrder[currentQuestionIndex].ToString();
-
-            }
-            catch (System.Exception)
-            {
-            }
-            UserAnswer curUserAnsInd = db.UserAnswers.Where(b => b.UserAnswerID == indexOfCurrentQuestion).FirstOrDefault();
-
-            var currentQuestionInd = curUserAnsInd.QuestionID;
-            var correctAnswer = curUserAnsInd.CorrectAnswer;
-            var userAnswer = curUserAnsInd.UsersAnswer;
-            var currentQuestionText = db.Questions.Where(b => b.QuestionID == currentQuestionInd).FirstOrDefault();
-
-            if (questionOrder[currentQuestionIndex].ToString() == "1" && questionOrder[currentQuestionIndex + 1].ToString() == "0")
-            {
-                try
-                {
-                    currentQuestionIndex += 2;
-
-                }
-                catch
-                {
-                    currentQuestionIndex++;
-
-                }
-
-                curQuestionInd = "10";
-            }
-
-            Question currQ = null;
+            resultsInfo.Text = $"{currentQuestionIndex + 1}/{currentUserAnswer.Count}";
+            var currentQuestionID = currentUserAnswer[currentQuestionIndex].QuestionID;
+            var correctAnswer = currentUserAnswer[currentQuestionIndex].CorrectAnswer;
+            var usersAnswer = currentUserAnswer[currentQuestionIndex].UsersAnswer;
+            var currentQuestion = db.Questions.Where(b => b.QuestionID == currentQuestionID).FirstOrDefault();
 
             using (ApplicationContext db = new ApplicationContext())
             {
-                currQ = db.Questions.Where(c => c.QuestionID.ToString() == curQuestionInd).FirstOrDefault();
-                QuestionTextTextBlock.Text = currentQuestionText.QuestionText;
 
-                QuestionAnswerCorrect.Text = correctAnswer.ToString();
-                UserAnswer.Text = userAnswer.ToString();
+                QuestionTextTextBlock.Text = currentQuestion.QuestionText;
+
+                QuestionAnswerCorrect.Text = correctAnswer;
+                UserAnswer.Text = usersAnswer.ToString();
 
                 QuestionAnswerCorrect.Foreground = Brushes.Green;
 
@@ -109,10 +53,25 @@ namespace QualificationTest.Pages
                 }
             }
         }
-
-        private void AuthorizationNavigationButton_Click(object sender, RoutedEventArgs e)
+        private void NextQuestionButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Authorization());
+
+            if (currentQuestionIndex < currentUserAnswer.Count - 1)
+            {
+                currentQuestionIndex++;
+                LoadNewQuestion();
+            }
+            else
+            {
+                LoadNewQuestion();
+                ReturnToAuthorizationButton.Visibility = Visibility.Visible;
+                NextQuestionButton.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void ReturnToAuthorizationButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthorizationPage());
         }
     }
 }

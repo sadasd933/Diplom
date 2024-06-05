@@ -1,5 +1,6 @@
 ﻿using QualificationTest.Classes;
 using System.Data.Entity;
+using System.Data.Entity.Hierarchy;
 
 namespace QualificationTest
 {
@@ -13,7 +14,7 @@ namespace QualificationTest
         public DbSet<Test> Tests { get; set; }
         public DbSet<UserAnswer> UserAnswers { get; set; }
 
-
+        
 
         public ApplicationContext() : base("DefaultConnection") { }
 

@@ -14,14 +14,32 @@ namespace QualificationTest.Pages
         public TestPassedPage()
         {
             InitializeComponent();
-            Result currentResult = db.Results.Where(b => b.ResultsID >= 0).FirstOrDefault();
+            Result currentResult = db.Results.Where(r => r.ResultsID > 0).OrderByDescending(r => r.ResultsID).FirstOrDefault();
 
-            var name = currentResult.TesterName;
-            var percentage = currentResult.PercentageOfCorrectAnswers;
-            answersCount.Text = $"{name} прошёл тест и набрал {percentage}% правильных ответов";
+            var testerName = currentResult.TesterName;
+            var percentageOfCorrectAnswers = currentResult.PercentageOfCorrectAnswers;
+            var numberOfCorrectAnswers = currentResult.NumberOfCorrectAnswers;
+            var numberOfQuestions = currentResult.NumberOfQuestions;
+            answersCount.Text = $"{testerName} прошёл тест и набрал {percentageOfCorrectAnswers}% правильных ответов.\nЭто {numberOfCorrectAnswers}" +
+                $" верных ответов на {numberOfQuestions} вопросов!";
         }
 
-        private void Results_Click(object sender, RoutedEventArgs e)
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult rsltMessageBox = MessageBox.Show("Вы хотите вернуться на окно авторизации?", "Подтверждение",
+    MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            switch (rsltMessageBox)
+            {
+                case MessageBoxResult.Yes:
+                    NavigationService.Navigate(new AuthorizationPage());
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ResultsButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ResultsPage());
         }

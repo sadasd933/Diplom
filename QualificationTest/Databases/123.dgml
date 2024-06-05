@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Database" Label="Database.db" Category="Database" Group="Expanded" />
+    <Node Id="Answers" Label="Answers" Category="Table" Group="Collapsed" />
+    <Node Id="Answers_AnswerID" Label="AnswerID" Category="Field Primary" Description="bigint" />
+    <Node Id="Answers_AnswerText" Label="AnswerText" Category="Field Optional" Description="text" />
+    <Node Id="Answers_IsCorrect" Label="IsCorrect" Category="Field Optional" Description="text" />
+    <Node Id="Answers_QuestionID" Label="QuestionID" Category="Field Foreign" Description="bigint" />
+    <Node Id="Questions" Label="Questions" Category="Table" Group="Collapsed" />
+    <Node Id="Questions_QuestionID" Label="QuestionID" Category="Field Primary" Description="bigint" />
+    <Node Id="Questions_QuestionText" Label="QuestionText" Category="Field Optional" Description="text" />
+    <Node Id="Questions_NumOfCorrectAnswers" Label="NumOfCorrectAnswers" Category="Field Optional" Description="bigint" />
+    <Node Id="Questions_TestID" Label="TestID" Category="Field Foreign" Description="bigint" />
+    <Node Id="Results" Label="Results" Category="Table" Group="Collapsed" />
+    <Node Id="Results_ResultsID" Label="ResultsID" Category="Field Primary" Description="bigint" />
+    <Node Id="Results_TesterName" Label="TesterName" Category="Field Optional" Description="text" />
+    <Node Id="Results_PercentageOfCorrectAnswers" Label="PercentageOfCorrectAnswers" Category="Field Optional" Description="bigint" />
+    <Node Id="Results_NumberOfQuestions" Label="NumberOfQuestions" Category="Field Optional" Description="bigint" />
+    <Node Id="Results_NumberOfCorrectAnswers" Label="NumberOfCorrectAnswers" Category="Field Optional" Description="bigint" />
+    <Node Id="Tests" Label="Tests" Category="Table" Group="Collapsed" />
+    <Node Id="Tests_TestID" Label="TestID" Category="Field Primary" Description="bigint" />
+    <Node Id="Tests_NumberOfQuestions" Label="NumberOfQuestions" Category="Field Optional" Description="bigint" />
+    <Node Id="Tests_Difficulty" Label="Difficulty" Category="Field Optional" Description="text" />
+    <Node Id="UserAnswers" Label="UserAnswers" Category="Table" Group="Collapsed" />
+    <Node Id="UserAnswers_UserAnswerID" Label="UserAnswerID" Category="Field Primary" Description="bigint" />
+    <Node Id="UserAnswers_CorrectAnswer" Label="CorrectAnswer" Category="Field Optional" Description="text" />
+    <Node Id="UserAnswers_UsersAnswer" Label="UsersAnswer" Category="Field Optional" Description="text" />
+    <Node Id="UserAnswers_UserID" Label="UserID" Category="Field Foreign" Description="bigint" />
+    <Node Id="UserAnswers_QuestionID" Label="QuestionID" Category="Field Foreign" Description="bigint" />
+    <Node Id="UserAnswers_ResultID" Label="ResultID" Category="Field Foreign" Description="bigint" />
+    <Node Id="Users" Label="Users" Category="Table" Group="Collapsed" />
+    <Node Id="Users_UsersID" Label="UsersID" Category="Field Primary" Description="bigint" />
+    <Node Id="Users_UsersName" Label="UsersName" Category="Field Optional" Description="text" />
+    <Node Id="Users_UsersLogin" Label="UsersLogin" Category="Field Optional" Description="text" />
+    <Node Id="Users_UsersPassword" Label="UsersPassword" Category="Field Optional" Description="text" />
+    <Node Id="Users_UsersRole" Label="UsersRole" Category="Field Optional" Description="text" />
+  </Nodes>
+  <Links>
+    <Link Source="Database" Target="Answers" Category="Contains" />
+    <Link Source="Answers" Target="Answers_AnswerID" Category="Contains" />
+    <Link Source="Answers" Target="Answers_AnswerText" Category="Contains" />
+    <Link Source="Answers" Target="Answers_IsCorrect" Category="Contains" />
+    <Link Source="Answers" Target="Answers_QuestionID" Category="Contains" />
+    <Link Source="Answers_QuestionID" Target="Questions_QuestionID" Label="FK_Answers_0_0" Category="Foreign Key" />
+    <Link Source="Database" Target="Questions" Category="Contains" />
+    <Link Source="Questions" Target="Questions_QuestionID" Category="Contains" />
+    <Link Source="Questions" Target="Questions_QuestionText" Category="Contains" />
+    <Link Source="Questions" Target="Questions_NumOfCorrectAnswers" Category="Contains" />
+    <Link Source="Questions" Target="Questions_TestID" Category="Contains" />
+    <Link Source="Questions_TestID" Target="Tests_TestID" Label="FK_Questions_0_0" Category="Foreign Key" />
+    <Link Source="Database" Target="Results" Category="Contains" />
+    <Link Source="Results" Target="Results_ResultsID" Category="Contains" />
+    <Link Source="Results" Target="Results_TesterName" Category="Contains" />
+    <Link Source="Results" Target="Results_PercentageOfCorrectAnswers" Category="Contains" />
+    <Link Source="Results" Target="Results_NumberOfQuestions" Category="Contains" />
+    <Link Source="Results" Target="Results_NumberOfCorrectAnswers" Category="Contains" />
+    <Link Source="Database" Target="Tests" Category="Contains" />
+    <Link Source="Tests" Target="Tests_TestID" Category="Contains" />
+    <Link Source="Tests" Target="Tests_NumberOfQuestions" Category="Contains" />
+    <Link Source="Tests" Target="Tests_Difficulty" Category="Contains" />
+    <Link Source="Database" Target="UserAnswers" Category="Contains" />
+    <Link Source="UserAnswers" Target="UserAnswers_UserAnswerID" Category="Contains" />
+    <Link Source="UserAnswers" Target="UserAnswers_CorrectAnswer" Category="Contains" />
+    <Link Source="UserAnswers" Target="UserAnswers_UsersAnswer" Category="Contains" />
+    <Link Source="UserAnswers" Target="UserAnswers_UserID" Category="Contains" />
+    <Link Source="UserAnswers" Target="UserAnswers_QuestionID" Category="Contains" />
+    <Link Source="UserAnswers" Target="UserAnswers_ResultID" Category="Contains" />
+    <Link Source="UserAnswers_ResultID" Target="Results_ResultsID" Label="FK_UserAnswers_0_0" Category="Foreign Key" />
+    <Link Source="UserAnswers_UserID" Target="Users_UsersID" Label="FK_UserAnswers_1_0" Category="Foreign Key" />
+    <Link Source="UserAnswers_QuestionID" Target="Questions_QuestionID" Label="FK_UserAnswers_2_0" Category="Foreign Key" />
+    <Link Source="Database" Target="Users" Category="Contains" />
+    <Link Source="Users" Target="Users_UsersID" Category="Contains" />
+    <Link Source="Users" Target="Users_UsersName" Category="Contains" />
+    <Link Source="Users" Target="Users_UsersLogin" Category="Contains" />
+    <Link Source="Users" Target="Users_UsersPassword" Category="Contains" />
+    <Link Source="Users" Target="Users_UsersRole" Category="Contains" />
+  </Links>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Table" ValueLabel="True">
+      <Condition Expression="HasCategory('Table')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Schema" ValueLabel="True">
+      <Condition Expression="HasCategory('Schema')" />
+      <Setter Property="Background" Value="#FF7F9169" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Primary" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Primary')" />
+      <Setter Property="Background" Value="#FF008000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Optional" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Optional')" />
+      <Setter Property="Background" Value="#FF808040" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Foreign" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Foreign')" />
+      <Setter Property="Background" Value="#FF8080FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field" ValueLabel="True">
+      <Condition Expression="HasCategory('Field')" />
+      <Setter Property="Background" Value="#FFC0A000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Database" ValueLabel="True">
+      <Condition Expression="HasCategory('Database')" />
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+  </Styles>
+</DirectedGraph>
