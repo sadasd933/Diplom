@@ -14,17 +14,27 @@
             <RowDefinition Height="0.75*"/>
             <RowDefinition Height="0.75*"/>
             <RowDefinition Height="1.2*"/>
-
         </Grid.RowDefinitions>
-        <RadioButton x:Name="Ans1" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Height="30" Width="30" Margin="20,0,0,0"/>
-        <RadioButton x:Name="Ans2" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="3" Height="30" Width="30" Margin="20,0,0,0"/>
-        <RadioButton x:Name="Ans3" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="4" Height="30" Width="30" Margin="20,0,0,0"/>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="testInfoTextBlock" Grid.Column="1" Width="200" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap"/>
+        <RadioButton x:Name="FirstAnswerRadioButton" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Height="30" Width="30" Margin="20,0,0,0" Grid.Column="0"/>
+        <RadioButton x:Name="SecondAnswerRadioButton" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="3" Height="30" Width="30" Margin="20,0,0,0" Grid.Column="0"/>
+        <RadioButton x:Name="ThirdAnswerRadioButton" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="4" Height="30" Width="30" Margin="20,0,0,0" Grid.Column="0"/>
         <TextBlock x:Name="QuestionTextTextBlock" Text="Здесь будет текст вопроса" Grid.Row="0" FontSize="24"
-                   VerticalAlignment="Bottom" TextWrapping="Wrap" HorizontalAlignment="Left" Height="119" Width="732" Margin="20,20,0,0"/>
-        <TextBlock x:Name="QuestionAnswer1" Grid.Row="2" Text="Вариант ответа №1" MinHeight="20" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBlock x:Name="QuestionAnswer2" Grid.Row="3" Text="Вариант ответа №2" MinHeight="20" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <TextBlock x:Name="QuestionAnswer3" Grid.Row="4" Text="Вариант ответа №3" MinHeight="20" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <Button x:Name="SubmitAnswer" Content="Ответить" HorizontalAlignment="Left" Grid.Row="5" Height="40" Width="160" Margin="25,0,0,0" Click="SubmitAnswer_Click"/>
-        <Button x:Name="EndTestButton" Content="Завершить тестирования" HorizontalAlignment="Right" Grid.Row="5" Height="40" MinWidth="160" Margin="0,0,25,0" Click="EndTestButton_Click" Visibility="Hidden"/>
+                   VerticalAlignment="Bottom" TextWrapping="Wrap" HorizontalAlignment="Left" Height="119" Width="700" Margin="20,20,0,0" Grid.Column="0"/>
+        <TextBlock x:Name="FirstAnswerTextBlock" Grid.Row="2" Text="Вариант ответа №1" MinHeight="20" Margin="50,0,0,0" HorizontalAlignment="Left"
+                   VerticalAlignment="Center" Grid.Column="0" FontSize="20" TextWrapping="Wrap"/>
+        <TextBlock x:Name="SecondAnswerTextBlock" Grid.Row="3" Text="Вариант ответа №2" MinHeight="20" Margin="50,0,0,0" VerticalAlignment="Center"
+                   HorizontalAlignment="Left" Grid.Column="0" FontSize="20" TextWrapping="Wrap"/>
+        <TextBlock x:Name="ThirdAnswerTextBlock" Grid.Row="4" Text="Вариант ответа №3" MinHeight="20" Margin="50,0,0,0" VerticalAlignment="Center"
+                   HorizontalAlignment="Left" Grid.Column="0" FontSize="20" TextWrapping="Wrap"/>
+        <Button x:Name="SubmitAnswerButton" Content="Ответить" HorizontalAlignment="Left" Grid.Row="5" Height="40" Width="160" Margin="25,0,0,0" Grid.Column="0"
+                Click="SubmitAnswerButton_Click"/>
+        <Button x:Name="EndTestButton" Content="Завершить тестирование" HorizontalAlignment="Right" Grid.Row="5" Height="40" MinWidth="160" Grid.Column="0"
+                Margin="0,0,25,0" Click="EndTestButton_Click" Visibility="Hidden"/>
     </Grid>
 </Page>

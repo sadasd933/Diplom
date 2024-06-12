@@ -16,11 +16,20 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="clientTB" Text="Поздравляем" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock x:Name="clientTB" Text="Тест пройден" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                    FontSize="40" FontWeight="Bold" Margin="20,0,0,0" FontFamily="Bahnschrift SemiLight"/>
-        <TextBlock x:Name="answersCount" Text="!!" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"
+        <TextBlock x:Name="answersCount" Text="Тут отображаются набранные результаты" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Left"
                    FontSize="20" Margin="20,0,0,0"/>
-        <Button x:Name="Results" Content="Посмотреть результаты" FontSize="18" Click="Results_Click" Grid.Row="3" 
-                VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="30" Margin="0,0,0,0" />
+        <Button x:Name="ResultsButton" FontSize="18" Click="ResultsButton_Click" Grid.Row="3" 
+                VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="60" Margin="0,0,0,0" Background="#FF608B8A">
+            <TextBlock Text="Посмотреть подробные результаты" TextWrapping="Wrap"/>
+        </Button>
+        <Button x:Name="ReturnButton" Content="Вернуться к авторизации" FontSize="18" Click="ReturnButton_Click" Grid.Row="3" Grid.Column="2"
+        VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="60" Margin="0,0,0,0" Background="#FF2D426D" />
     </Grid>
 </Page>
