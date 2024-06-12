@@ -11,7 +11,7 @@ namespace QualificationTest.Pages
     /// </summary>
     public partial class TestCreationPage : Page
     {
-        private string corrAnswer;
+        private string correctAnswer;
         private Question currQ = null;
         ApplicationContext db;
         public TestCreationPage()
@@ -25,11 +25,11 @@ namespace QualificationTest.Pages
         private void createQuestionButton_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBoxResult rsltMessageBox = MessageBox.Show("Вы уверены, что хотите добавить вопрос?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            MessageBoxResult resultMessageBox = MessageBox.Show("Вы уверены, что хотите добавить вопрос?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Information);
             bool isAllAnswersEntered = firstAnswerTB != null && secondAnswerTB != null && thirdAnswerTB != null;
             bool isCorrectAnswerChecked = (isCorrect1.IsChecked != false || isCorrect2.IsChecked != false || isCorrect3.IsChecked != false);
             bool isAllEntered = questionTextTB.Text != null && testSelectionCB.SelectedItem != null && isCorrectAnswerChecked && isAllAnswersEntered;
-            switch (rsltMessageBox)
+            switch (resultMessageBox)
             {
                 case MessageBoxResult.Yes:
                     if (isAllEntered)
@@ -112,31 +112,31 @@ namespace QualificationTest.Pages
 
             if (isCorrect1.IsChecked == true)
             {
-                corrAnswer = "1";
+                correctAnswer = "1";
             }
             else if (isCorrect2.IsChecked == true)
             {
-                corrAnswer = "2";
+                correctAnswer = "2";
             }
             else if (isCorrect3.IsChecked == true)
             {
-                corrAnswer = "3";
+                correctAnswer = "3";
             }
 
-            string answToIns;
+            string answerToInsert;
             switch (q)
             {
                 case 1:
-                    answToIns = firstAnswerTB.Text.ToString();
+                    answerToInsert = firstAnswerTB.Text.ToString();
                     break;
                 case 2:
-                    answToIns = secondAnswerTB.Text.ToString();
+                    answerToInsert = secondAnswerTB.Text.ToString();
                     break;
                 case 3:
-                    answToIns = thirdAnswerTB.Text.ToString();
+                    answerToInsert = thirdAnswerTB.Text.ToString();
                     break;
                 default:
-                    answToIns = string.Empty;
+                    answerToInsert = string.Empty;
                     break;
             }
 
@@ -145,13 +145,13 @@ namespace QualificationTest.Pages
                 switch (property.Name)
                 {
                     case "AnswerText":
-                        property.SetValue(toAdd, answToIns);
+                        property.SetValue(toAdd, answerToInsert);
                         break;
                     case "QuestionID":
                         property.SetValue(toAdd, currQ.QuestionID);
                         break;
                     case "IsCorrect":
-                        if (corrAnswer == q.ToString())
+                        if (correctAnswer == q.ToString())
                         {
                             property.SetValue(toAdd, "true");
                         }
@@ -167,12 +167,12 @@ namespace QualificationTest.Pages
         }
 
 
-        private void returnToAuthButton_Click(object sender, RoutedEventArgs e)
+        private void returnToAuthorizationButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult rsltMessageBox = MessageBox.Show("Вы хотите вернуться на окно авторизации?", "Подтверждение",
+            MessageBoxResult resultMessageBox = MessageBox.Show("Вы хотите вернуться на окно авторизации?", "Подтверждение",
     MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-            switch (rsltMessageBox)
+            switch (resultMessageBox)
             {
                 case MessageBoxResult.Yes:
                     NavigationService.Navigate(new AuthorizationPage());

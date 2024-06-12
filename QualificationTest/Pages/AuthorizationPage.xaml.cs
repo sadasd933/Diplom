@@ -12,7 +12,7 @@ namespace QualificationTest
     /// </summary>
     public partial class AuthorizationPage : Page
     {
-        ApplicationContext db;
+        private readonly ApplicationContext db;
 
         public AuthorizationPage()
         {
@@ -32,35 +32,35 @@ namespace QualificationTest
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            string login = loginTB.Text.Trim();
-            string pass = passwordTB.Password.Trim();
+            string login = loginTextBox.Text.Trim();
+            string password = passwordPasswordBox.Password.Trim();
 
             if (login.Length < 3)
             {
-                loginTB.ToolTip = "Поле введено некорректно!";
-                loginTB.Background = Brushes.IndianRed;
+                loginTextBox.ToolTip = "Поле введено некорректно!";
+                loginTextBox.Background = Brushes.IndianRed;
             }
-            else if (pass.Length < 3)
+            else if (password.Length < 3)
             {
-                passwordTB.ToolTip = "Поле введено некорректно!";
-                passwordTB.Background = Brushes.IndianRed;
+                passwordPasswordBox.ToolTip = "Поле введено некорректно!";
+                passwordPasswordBox.Background = Brushes.IndianRed;
             }
             else
             {
-                loginTB.ToolTip = "";
-                loginTB.Background = Brushes.Transparent;
-                passwordTB.ToolTip = "";
-                passwordTB.Background = Brushes.Transparent;
+                loginTextBox.ToolTip = "";
+                loginTextBox.Background = Brushes.Transparent;
+                passwordPasswordBox.ToolTip = "";
+                passwordPasswordBox.Background = Brushes.Transparent;
 
-                User authUser = null;
+                User userToAuthorize = null;
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    authUser = db.Users.Where(b => b.UsersLogin.ToString() == login && b.UsersPassword.ToString() == pass).FirstOrDefault();
+                    userToAuthorize = db.Users.Where(b => b.UsersLogin.ToString() == login && b.UsersPassword.ToString() == password).FirstOrDefault();
                 }
-                if (authUser != null)
+                if (userToAuthorize != null)
                 {
-                    Application.Current.Properties["testerName"] = authUser.UsersName.ToString();
-                    switch (authUser.UsersRole)
+                    Application.Current.Properties["testerName"] = userToAuthorize.UsersName.ToString();
+                    switch (userToAuthorize.UsersRole)
                     {
                         case "Tester":
                             NavigationService.Navigate(new TestSelectionPage());

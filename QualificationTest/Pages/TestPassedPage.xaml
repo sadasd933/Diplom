@@ -21,7 +21,7 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         
-        <TextBlock x:Name="clientTB" Text="Поздравляем" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+        <TextBlock x:Name="clientTB" Text="Тест пройден" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                    FontSize="40" FontWeight="Bold" Margin="20,0,0,0" FontFamily="Bahnschrift SemiLight"/>
         <TextBlock x:Name="answersCount" Text="Тут отображаются набранные результаты" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Left"
                    FontSize="20" Margin="20,0,0,0"/>

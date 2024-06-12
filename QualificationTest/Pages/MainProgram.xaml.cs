@@ -31,8 +31,8 @@ namespace QualificationTest
             InitializeComponent();
             SetPageSize();
             db = new ApplicationContext();
-            var currQ = db.Questions.ToList();
-            questionCount = rnd.Next(5, currQ.Count);
+            var questions = db.Questions.ToList();
+            questionCount = rnd.Next(5, questions.Count);
 
 
             questionOrder = new List<int>(questionCount);
@@ -56,9 +56,9 @@ namespace QualificationTest
         }
         public void LoadQuestion()
         {
-            testInfo.Text = $"{currentQuestionIndex + 1}/{questionCount}";
+            testInfoTextBlock.Text = $"{currentQuestionIndex + 1}/{questionCount}";
 
-            Answer currAnswers1, currAnswers2, currAnswers3, correctAnswer = null;
+            Answer currentFirstAnswer, currentSecondAnswer, currentThirdAnswer, correctAnswer = null;
 
             int testIDToInt = int.Parse(testID);
             var currentAnswerIndex = questionOrder.ElementAt(currentQuestionIndex);
@@ -67,21 +67,21 @@ namespace QualificationTest
             {
                 currentQuestion = db.Questions.Where(b => b.QuestionID == currentAnswerIndex).FirstOrDefault();
 
-                currAnswers1 = db.Answers.Where(b => b.QuestionID == currentAnswerIndex).FirstOrDefault();
-                currAnswers2 = db.Answers.Where(b => b.QuestionID == currentAnswerIndex && b.AnswerID != currAnswers1.AnswerID).FirstOrDefault();
-                currAnswers3 = db.Answers.Where(b => b.QuestionID == currentAnswerIndex && b.AnswerID != currAnswers1.AnswerID && b.AnswerID != currAnswers2.AnswerID).FirstOrDefault();
+                currentFirstAnswer = db.Answers.Where(b => b.QuestionID == currentAnswerIndex).FirstOrDefault();
+                currentSecondAnswer = db.Answers.Where(b => b.QuestionID == currentAnswerIndex && b.AnswerID != currentFirstAnswer.AnswerID).FirstOrDefault();
+                currentThirdAnswer = db.Answers.Where(b => b.QuestionID == currentAnswerIndex && b.AnswerID != currentFirstAnswer.AnswerID && b.AnswerID != currentSecondAnswer.AnswerID).FirstOrDefault();
                 correctAnswer = db.Answers.Where(b => b.IsCorrect == "true" && b.QuestionID == currentAnswerIndex).FirstOrDefault();
                 indexOfAnswers = correctAnswer.AnswerID % 3; //индексация ответов от 0 до 2
 
 
                 QuestionTextTextBlock.Text = currentQuestion.QuestionText.ToString();
-                QuestionAnswer1.Text = currAnswers1.AnswerText.ToString();
-                QuestionAnswer2.Text = currAnswers2.AnswerText.ToString();
-                QuestionAnswer3.Text = currAnswers3.AnswerText.ToString();
+                FirstAnswerTextBlock.Text = currentFirstAnswer.AnswerText.ToString();
+                SecondAnswerTextBlock.Text = currentSecondAnswer.AnswerText.ToString();
+                ThirdAnswerTextBlock.Text = currentThirdAnswer.AnswerText.ToString();
 
             }
         }
-        private void AddUserAnswerCommandExecute()
+        private void AddUserAnswers()
         {
             UserAnswer answersToInsert = new UserAnswer();
             PropertyInfo[] properties = typeof(UserAnswer).GetProperties();
@@ -125,7 +125,7 @@ namespace QualificationTest
 
 
         }
-        private void SaveResultsCommandExecute()
+        private void SaveResults()
         {
             Result resultsToInsert = new Result();
             PropertyInfo[] properties = typeof(Result).GetProperties();
@@ -156,7 +156,7 @@ namespace QualificationTest
             }
 
         }
-        private void SubmitAnswer_Click(object sender, RoutedEventArgs e)
+        private void SubmitAnswerButton_Click(object sender, RoutedEventArgs e)
         {
             CheckAnswers();
 
@@ -167,7 +167,7 @@ namespace QualificationTest
             }
             else
             {
-                SubmitAnswer.Visibility = Visibility.Hidden;
+                SubmitAnswerButton.Visibility = Visibility.Hidden;
                 EndTestButton.Visibility = Visibility.Visible;
             }
         }
@@ -177,11 +177,11 @@ namespace QualificationTest
             switch (indexOfAnswers)
             {
                 case 1:
-                    if (Ans1.IsChecked == true)
+                    if (FirstAnswerRadioButton.IsChecked == true)
                     {
                         AddAnswers(1, 1);
                     }
-                    else if (Ans2.IsChecked == true)
+                    else if (SecondAnswerRadioButton.IsChecked == true)
                     {
                         AddAnswers(1, 2);
                     }
@@ -192,11 +192,11 @@ namespace QualificationTest
                     break;
 
                 case 2:
-                    if (Ans1.IsChecked == true)
+                    if (FirstAnswerRadioButton.IsChecked == true)
                     {
                         AddAnswers(2, 1);
                     }
-                    else if (Ans2.IsChecked == true)
+                    else if (SecondAnswerRadioButton.IsChecked == true)
                     {
                         AddAnswers(2, 2);
                     }
@@ -206,11 +206,11 @@ namespace QualificationTest
                     }
                     break;
                 case 0:
-                    if (Ans1.IsChecked == true)
+                    if (FirstAnswerRadioButton.IsChecked == true)
                     {
                         AddAnswers(3, 1);
                     }
-                    else if (Ans2.IsChecked == true)
+                    else if (SecondAnswerRadioButton.IsChecked == true)
                     {
                         AddAnswers(3, 2);
 
@@ -224,61 +224,61 @@ namespace QualificationTest
             }
         }
 
-        private void AddAnswers(int corrAns, int userAns)
+        private void AddAnswers(int correctAnswer, int userAnswer)
         {
-            switch (corrAns)
+            switch (correctAnswer)
             {
                 case 1:
-                    switch (userAns)
+                    switch (userAnswer)
                     {
                         case 1:
-                            userAnswers.Add(QuestionAnswer1.Text.ToString());
-                            correctAnswers.Add(QuestionAnswer1.Text.ToString());
+                            userAnswers.Add(FirstAnswerTextBlock.Text.ToString());
+                            correctAnswers.Add(FirstAnswerTextBlock.Text.ToString());
                             numOfCorrectAnswers++;
                             break;
                         case 2:
-                            userAnswers.Add(QuestionAnswer2.Text.ToString());
-                            correctAnswers.Add(QuestionAnswer1.Text.ToString());
+                            userAnswers.Add(SecondAnswerTextBlock.Text.ToString());
+                            correctAnswers.Add(FirstAnswerTextBlock.Text.ToString());
                             break;
                         default:
-                            userAnswers.Add(QuestionAnswer3.Text.ToString());
-                            correctAnswers.Add(QuestionAnswer1.Text.ToString());
+                            userAnswers.Add(ThirdAnswerTextBlock.Text.ToString());
+                            correctAnswers.Add(FirstAnswerTextBlock.Text.ToString());
                             break;
                     }
                     break;
                 case 2:
-                    switch (userAns)
+                    switch (userAnswer)
                     {
                         case 1:
-                            userAnswers.Add(QuestionAnswer1.Text.ToString());
-                            correctAnswers.Add(QuestionAnswer2.Text.ToString());
+                            userAnswers.Add(FirstAnswerTextBlock.Text.ToString());
+                            correctAnswers.Add(SecondAnswerTextBlock.Text.ToString());
 
                             break;
                         case 2:
-                            userAnswers.Add(QuestionAnswer2.Text.ToString());
-                            correctAnswers.Add(QuestionAnswer2.Text.ToString());
+                            userAnswers.Add(SecondAnswerTextBlock.Text.ToString());
+                            correctAnswers.Add(SecondAnswerTextBlock.Text.ToString());
                             numOfCorrectAnswers++;
                             break;
                         default:
-                            userAnswers.Add(QuestionAnswer3.Text.ToString());
-                            correctAnswers.Add(QuestionAnswer2.Text.ToString());
+                            userAnswers.Add(ThirdAnswerTextBlock.Text.ToString());
+                            correctAnswers.Add(SecondAnswerTextBlock.Text.ToString());
                             break;
                     }
                     break;
                 case 3:
-                    switch (userAns)
+                    switch (userAnswer)
                     {
                         case 1:
-                            userAnswers.Add(QuestionAnswer1.Text.ToString());
-                            correctAnswers.Add(QuestionAnswer3.Text.ToString());
+                            userAnswers.Add(FirstAnswerTextBlock.Text.ToString());
+                            correctAnswers.Add(ThirdAnswerTextBlock.Text.ToString());
                             break;
                         case 2:
-                            userAnswers.Add(QuestionAnswer2.Text.ToString());
-                            correctAnswers.Add(QuestionAnswer3.Text.ToString());
+                            userAnswers.Add(SecondAnswerTextBlock.Text.ToString());
+                            correctAnswers.Add(ThirdAnswerTextBlock.Text.ToString());
                             break;
                         default:
-                            userAnswers.Add(QuestionAnswer3.Text.ToString());
-                            correctAnswers.Add(QuestionAnswer3.Text.ToString());
+                            userAnswers.Add(ThirdAnswerTextBlock.Text.ToString());
+                            correctAnswers.Add(ThirdAnswerTextBlock.Text.ToString());
                             numOfCorrectAnswers++;
                             break;
                     }
@@ -290,8 +290,8 @@ namespace QualificationTest
         private void EndTestButton_Click(object sender, RoutedEventArgs e)
         {
             CheckAnswers();
-            SaveResultsCommandExecute();
-            AddUserAnswerCommandExecute();
+            SaveResults();
+            AddUserAnswers();
             NavigationService.Navigate(new TestPassedPage());
         }
         private void SetPageSize()

@@ -48,7 +48,7 @@
 
             <Button x:Name="createQuestionButton" Content="Создать вопрос" FontSize="18" Click="createQuestionButton_Click" Grid.Row="5" VerticalAlignment="Center" 
         Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="250" Height="35" Margin="20,0,0,0" />
-            <Button x:Name="returnToAuthButton" FontSize="18" Click="returnToAuthButton_Click" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" 
+            <Button x:Name="returnToAuthButton" FontSize="18" Click="returnToAuthorizationButton_Click" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" 
         Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="150" Height="35" Margin="20,0,0,0" Cursor="Hand">
                 <TextBlock Text="Вернуться" TextWrapping="Wrap"/>
             </Button>

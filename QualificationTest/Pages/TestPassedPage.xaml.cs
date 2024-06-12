@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -14,6 +15,7 @@ namespace QualificationTest.Pages
         public TestPassedPage()
         {
             InitializeComponent();
+            SetPageSize();
             Result currentResult = db.Results.Where(r => r.ResultsID > 0).OrderByDescending(r => r.ResultsID).FirstOrDefault();
 
             var testerName = currentResult.TesterName;
@@ -24,12 +26,20 @@ namespace QualificationTest.Pages
                 $" верных ответов на {numberOfQuestions} вопросов!";
         }
 
+        private void SetPageSize()
+        {
+            Application.Current.MainWindow.MinHeight = 450;
+            Application.Current.MainWindow.MinWidth = 800;
+            Application.Current.MainWindow.Height = 450;
+            Application.Current.MainWindow.Width = 800;
+        }
+
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult rsltMessageBox = MessageBox.Show("Вы хотите вернуться на окно авторизации?", "Подтверждение",
+            MessageBoxResult resultMessageBox = MessageBox.Show("Вы хотите вернуться на окно авторизации?", "Подтверждение",
     MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-            switch (rsltMessageBox)
+            switch (resultMessageBox)
             {
                 case MessageBoxResult.Yes:
                     NavigationService.Navigate(new AuthorizationPage());
